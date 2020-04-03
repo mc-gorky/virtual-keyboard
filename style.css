@@ -1,4 +1,20 @@
+.textarea {
+    position: absolute;
+    left: 30%;
+    width: 600px;
+    height: 200px;
+    border-radius: 5px;
+    outline: none;
+    border: 1px solid black;
+    resize: none;
+}
+
 .btn-selected {
     background-color: black;
     color: white;
+}
+
+.button {
+    display: inline-block;
+    border: 1px solid red;
 }
