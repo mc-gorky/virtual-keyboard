@@ -1,558 +1,797 @@
-const keyboardMap = {
+
+
+// TODO: move to separate file
+
+const buttonTypes =  {
+  printSymbol: 'printSymbol',
+  capsLock: 'capsLock',
+  backspace: 'backspace',
+  tab: 'tab',
+  enter: 'enter',
+  shift: 'shift',
+  control: 'control',
+  meta: 'meta',
+  alt: 'alt',
+  spacebar: 'spacebar',
+}
+
+const buttonsConfig = {
   backquote: {
-    symbol: '`',
-    shiftSymbol: '~',
-    ru: 'ё',
+    type: buttonTypes.printSymbol,
+    text: {
+      en: {
+        default: '`',
+        shift: '~',
+      },
+      ru: {
+        default: 'ё',
+        shift: 'Ё',
+      },
+    },
+    id: 'Backquote',
   },
-  Digit1: {
-    digit: '1',
-    shiftEn: '!',
-    shiftRu: '!',
+  digit1: {
+    type: buttonTypes.printSymbol,
+    text: {
+      en: {
+        default: '1',
+        shift: '!',
+      },
+      ru: {
+        default: '1',
+        shift: '!',
+      },
+    },
+    id: 'Digit1',
   },
-  Digit2: {
-    digit: '2',
-    shiftEn: '@',
-    shiftRu: '"',
+  digit2: {
+    type: buttonTypes.printSymbol,
+    text: {
+      en: {
+      default: '2',
+      shift: '@',
+    },
+    ru: {
+      default: '2',
+      shift: '"',
+    },
   },
-  Digit3: {
-    digit: '3',
-    shiftEn: '#',
-    shiftRu: '№',
+    id: 'Digit2',
   },
-  Digit4: {
-    digit: '4',
-    shiftEn: '$',
-    shiftRu: ';',
+  digit3: {
+    type: buttonTypes.printSymbol,
+    text: {
+      en: {
+        default: '3',
+        shift: '#',
+      },
+      ru: {
+        default: '3',
+        shift: '№',
+      },
+    },
+    id: 'Digit3',
   },
-  Digit5: {
-    digit: '5',
-    shiftEn: '@',
-    shiftRu: '"',
+  digit4: {
+    type: buttonTypes.printSymbol,
+    text: {
+      en: {
+        default: '4',
+        shift: '$',
+      },
+      ru: {
+        default: '4',
+        shift: ';',
+      },
+    },
+    id: 'Digit4',
   },
-  Digit6: {
-    digit: '6',
-    shiftEn: '@',
-    shiftRu: '"',
+  digit5: {
+    type: buttonTypes.printSymbol,
+    text: {
+      en: {
+        default: '5',
+        shift: '%',
+      },
+      ru: {
+        default: '5',
+        shift: '%',
+      },
+    },
+    id: 'Digit5',
   },
-  Digit7: {
-    digit: '7',
-    shiftEn: '@',
-    shiftRu: '"',
+  digit6: {
+    type: buttonTypes.printSymbol,
+    text: {
+      en: {
+        default: '6',
+        shift: '^',
+      },
+      ru: {
+        default: '6',
+        shift: ':',
+      },
+    },
+    id: 'Digit6',
   },
-  Digit8: {
-    digit: '8',
-    shiftEn: '@',
-    shiftRu: '"',
+  digit7: {
+    type: buttonTypes.printSymbol,
+    text: {
+      en: {
+        default: '7',
+        shift: '&',
+      },
+      ru: {
+        default: '7',
+        shift: '?',
+      },
+    },
+    id: 'Digit7',
   },
-  Digit9: {
-    digit: '9',
-    shiftEn: '@',
-    shiftRu: '"',
+  digit8: {
+    type: buttonTypes.printSymbol,
+    text: {
+      en: {
+        default: '8',
+        shift: '*',
+      },
+      ru: {
+        default: '8',
+        shift: '*',
+      },
+    },
+    id: 'Digit8',
   },
-  Digit0: {
-    digit: '0',
-    shiftEn: '@',
-    shiftRu: '"',
+  digit9: {
+    type: buttonTypes.printSymbol,
+    text: {
+      en: {
+        default: '9',
+        shift: '(',
+      },
+      ru: {
+        default: '9',
+        shift: '(',
+      },
+    },
+    id: 'Digit9',
   },
-  Minus: {
-    symbol: '-',
-    shiftSymbol: '_',
+  digit0: {
+    type: buttonTypes.printSymbol,
+    text: {
+      en: {
+        default: '0',
+        shift: ')',
+      },
+      ru: {
+        default: '0',
+        shift: ')',
+      },
+    },
+    id: 'Digit0',
   },
-  Equal: {
-    symbol: '=',
-    shiftSymbol: '+',
+  minus: {
+    type: buttonTypes.printSymbol,
+    text: {
+      en: {
+        default: '-',
+        shift: '_',
+      },
+      ru: {
+        default: '-',
+        shift: '_',
+      },
+    },
+    id: 'Minus',
   },
-  Backspace: {
+  equal: {
+      type: buttonTypes.printSymbol,
+      text: {
+        en: {
+          default: '=',
+          shift: '+',
+        },
+        ru: {
+          default: '=',
+          shift: '+',
+        },
+      },
+      id: 'Equal',
+  },
+  backspace: {
+    type: buttonTypes.backspace,
     text: 'Backspace',
+    id: 'Backspace',
   },
-  Tab: {
+  tab: {
+    type: buttonTypes.tab,
     text: 'Tab',
+    id: 'Tab',
   },
-  q: {
-    en: 'q',
-    ru: 'й',
+  keyq: {
+    type: buttonTypes.printSymbol,
+    text: {
+      en: {
+        default: 'q',
+        shift: 'Q',
+      },
+      ru: {
+        default: 'й',
+        shift: 'Й',
+      },
+    },
+    id: 'KeyQ',
   },
-  w: {
-    en: 'w',
-    ru: 'ц',
+  keyw: {
+    type: buttonTypes.printSymbol,
+    text: {
+      en: {
+        default: 'w',
+        shift: 'W',
+      },
+      ru: {
+        default: 'ц',
+        shift: 'Ц',
+      },
+    },
+    id: 'KeyW',
   },
-  e: {
-    en: 'e',
-    ru: 'к',
+  keye: {
+    type: buttonTypes.printSymbol,
+    text: {
+      en: {
+        default: 'e',
+        shift: 'E',
+      },
+      ru: {
+        default: 'у',
+        shift: 'У',
+      },
+    },
+    id: 'KeyE',
   },
-  r: {
-    en: 'r',
-    ru: 'к',
+  keyr: {
+      type: buttonTypes.printSymbol,
+      text: {
+        en: {
+          default: 'r',
+          shift: 'R',
+        },
+        ru: {
+          default: 'к',
+          shift: 'К',
+        },
+      },
+      id: 'KeyR',
+    },
+  keyt: {
+    type: buttonTypes.printSymbol,
+    text: {
+      en: {
+        default: 't',
+        shift: 'T',
+      },
+      ru: {
+        default: 'е',
+        shift: 'Е',
+      },
+    },
+    id: 'KeyT',
   },
-  t: {
-    en: 't',
-    ru: 'е',
+  keyy: {
+    type: buttonTypes.printSymbol,
+    text: {
+      en: {
+        default: 'y',
+        shift: 'Y',
+      },
+      ru: {
+        default: 'н',
+        shift: 'Н',
+      },
+    },
+    id: 'KeyY',
   },
-  y: {
-    en: 'y',
-    ru: 'н',
+  keyu: {
+    type: buttonTypes.printSymbol,
+    text: {
+      en: {
+        default: 'u',
+        shift: 'U',
+      },
+      ru: {
+        default: 'г',
+        shift: 'Г',
+      },
+    },
+    id: 'KeyU',
   },
-  u: {
-    en: 'u',
-    ru: 'г',
+  keyi: {
+    type: buttonTypes.printSymbol,
+    text: {
+      en: {
+        default: 'i',
+        shift: 'I',
+      },
+      ru: {
+        default: 'ш',
+        shift: 'Ш',
+      },
+    },
+    id: 'KeyI',
   },
-  i: {
-    en: 'i',
-    ru: 'ш',
+  keyo: {
+    type: buttonTypes.printSymbol,
+    text: {
+      en: {
+        default: 'o',
+        shift: 'O',
+      },
+      ru: {
+        default: 'щ',
+        shift: 'Щ',
+      },
+    },
+    id: 'KeyO',
   },
-  o: {
-    en: 'o',
-    ru: 'щ',
+  keyp: {
+    type: buttonTypes.printSymbol,
+    text: {
+      en: {
+        default: 'p',
+        shift: 'P',
+      },
+      ru: {
+        default: 'з',
+        shift: 'З',
+      },
+    },
+    id: 'KeyP',
   },
-  p: {
-    en: 'p',
-    ru: 'з',
+  bracketleft: {
+    type: buttonTypes.printSymbol,
+    text: {
+      en: {
+        default: '[',
+        shift: '{',
+      },
+      ru: {
+        default: 'х',
+        shift: 'Х',
+      },
+    },
+    id: 'BracketLeft',
   },
-  BracketLeft: {
-    symbol: '[',
-    shiftSymbol: '{',
-    ru: 'х',
+  bracketright: {
+    type: buttonTypes.printSymbol,
+    text: {
+      en: {
+        default: ']',
+        shift: '}',
+      },
+      ru: {
+        default: 'ъ',
+        shift: 'Ъ',
+      },
+    },
+    id: 'BracketRight',
   },
-  BracketRight: {
-    symbol: ']',
-    shiftSymbol: '}',
-    ru: 'ъ',
+  backslash: {
+    type: buttonTypes.printSymbol,
+    text: {
+      en: {
+        default: '\\',
+        shift: '|',
+      },
+      ru: {
+        default: '\\',
+        shift: '|',
+      },
+    },
+    id: 'Backslash',
   },
-  Backslash: {
-    symbol: '\\',
-    shiftSymbol: '|',
+  slash: {
+    type: buttonTypes.printSymbol,
+    text: {
+      en: {
+        default: '/',
+        shift: '?',
+      },
+      ru: {
+        default: '/',
+        shift: '?',
+      },
+    },
+    id: 'Slash',
   },
-  Slash: {
-    symbol: '/',
-    shiftSymbol: '?',
+  capslock: {
+    type: buttonTypes.capsLock,
+    text: 'Caps Lock',
+    id: 'CapsLock',
   },
-  a: {
-    en: 'a',
-    ru: 'ф',
+  keya: {
+    type: buttonTypes.printSymbol,
+    text: {
+      en: {
+        default: 'a',
+        shift: 'A',
+      },
+      ru: {
+        default: 'ф',
+        shift: 'Ф',
+      },
+    },
+    id: 'KeyA',
   },
-  s: {
-    en: 's',
-    ru: 'ы',
+  keys: {
+    type: buttonTypes.printSymbol,
+    text: {
+      en: {
+        default: 's',
+        shift: 'S',
+      },
+      ru: {
+        default: 'ы',
+        shift: 'Ы',
+      },
+    },
+    id: 'KeyS',
   },
-  d: {
-    en: 'd',
-    ru: 'в',
+  keyd:{
+    type: buttonTypes.printSymbol,
+    text: {
+      en: {
+        default: 'd',
+        shift: 'D',
+      },
+      ru: {
+        default: 'в',
+        shift: 'В',
+      },
+    },
+    id: 'KeyD',
   },
-  f: {
-    en: 'f',
-    ru: 'а',
+  keyf: {
+    type: buttonTypes.printSymbol,
+    text: {
+      en: {
+        default: 'f',
+        shift: 'F',
+      },
+      ru: {
+        default: 'а',
+        shift: 'А',
+      },
+    },
+    id: 'KeyF',
   },
-  g: {
-    en: 'g',
-    ru: 'п',
+  keyg: {
+    type: buttonTypes.printSymbol,
+    text: {
+      en: {
+        default: 'g',
+        shift: 'G',
+      },
+      ru: {
+        default: 'п',
+        shift: 'П',
+      },
+    },
+    id: 'KeyG',
   },
-  h: {
-    en: 'h',
-    ru: 'р',
+  keyh: {
+    type: buttonTypes.printSymbol,
+    text: {
+      en: {
+        default: 'h',
+        shift: 'H',
+      },
+      ru: {
+        default: 'р',
+        shift: 'Р',
+      },
+    },
+    id: 'KeyH',
   },
-  j: {
-    en: 'j',
-    ru: 'о',
+  keyj: {
+    type: buttonTypes.printSymbol,
+    text: {
+      en: {
+        default: 'j',
+        shift: 'J',
+      },
+      ru: {
+        default: 'о',
+        shift: 'О',
+      },
+    },
+    id: 'KeyJ',
   },
-  k: {
-    en: 'k',
-    ru: 'л',
+  keyk: {
+    type: buttonTypes.printSymbol,
+    text: {
+      en: {
+        default: 'k',
+        shift: 'K',
+      },
+      ru: {
+        default: 'л',
+        shift: 'Л',
+      },
+    },
+    id: 'KeyK',
   },
-  l: {
-    en: 'l',
-    ru: 'д',
+  keyl: {
+    type: buttonTypes.printSymbol,
+    text: {
+      en: {
+        default: 'l',
+        shift: 'L',
+      },
+      ru: {
+        default: 'д',
+        shift: 'Д',
+      },
+    },
+    id: 'KeyL',
   },
-  Semicolon: {
-    symbol: ';',
-    shiftSymbol: ':',
-    ru: 'ж',
+  semicolon: {
+    type: buttonTypes.printSymbol,
+    text: {
+      en: {
+        default: ';',
+        shift: ':',
+      },
+      ru: {
+        default: 'ж',
+        shift: 'Ж',
+      },
+    },
+    id: 'Semicolon',
   },
-  Quote: {
-    symbol: '\'',
-    shiftSymbol: '"',
-    ru: 'э',
+  quote: {
+    type: buttonTypes.printSymbol,
+    text: {
+      en: {
+        default: '\'',
+        shift: '"',
+      },
+      ru: {
+        default: 'э',
+        shift: 'Э',
+      },
+    },
+    id: 'Quote',
   },
-  Enter: {
+  enter: {
+    type: buttonTypes.enter,
     text: 'Enter',
+    id: 'Enter',
   },
-  Shift: {
+  shift: {
+    type: buttonTypes.shift,
     text: 'Shift',
+    id: 'Shift',
   },
-  z: {
-    en: 'z',
-    ru: 'я',
+  keyz: {
+    type: buttonTypes.printSymbol,
+    text: {
+      en: {
+        default: 'z',
+        shift: 'Z',
+      },
+      ru: {
+        default: 'я',
+        shift: 'Я',
+      },
+    },
+    id: 'KeyZ',
   },
-  x: {
-    en: 'x',
-    ru: 'ч',
+  keyx: {
+    type: buttonTypes.printSymbol,
+    text:  {
+      en: {
+        default: 'x',
+        shift: 'X',
+      },
+      ru: {
+        default: 'ч',
+        shift: 'Ч',
+      },
+    },
+    id: 'KeyX',
   },
-  c: {
-    en: 'c',
-    ru: 'с',
+  keyc: {
+    type: buttonTypes.printSymbol,
+    text: {
+      en: {
+        default: 'c',
+        shift: 'C',
+      },
+      ru: {
+        default: 'с',
+        shift: 'С',
+      },
+    },
+    id: 'KeyC',
   },
-  v: {
-    en: 'v',
-    ru: 'м',
+  keyv: {
+    type: buttonTypes.printSymbol,
+    text: {
+      en: {
+        default: 'v',
+        shift: 'V',
+      },
+      ru: {
+        default: 'м',
+        shift: 'М',
+      },
+    },
+    id: 'KeyV',
   },
-  b: {
-    en: 'b',
-    ru: 'и',
+  keyb: {
+    type: buttonTypes.printSymbol,
+    text: {
+      en: {
+        default: 'b',
+        shift: 'B',
+      },
+      ru: {
+        default: 'и',
+        shift: 'И',
+      },
+    },
+    id: 'KeyB',
   },
-  n: {
-    en: 'n',
-    ru: 'т',
+  keyn: {
+    type: buttonTypes.printSymbol,
+    text: {
+      en: {
+        default: 'n',
+        shift: 'N',
+      },
+      ru: {
+        default: 'т',
+        shift: 'Т',
+      },
+    },
+    id: 'KeyN',
   },
-  m: {
-    en: 'm',
-    ru: 'ь',
+  keym: {
+    type: buttonTypes.printSymbol,
+    text: {
+      en: {
+        default: 'm',
+        shift: 'M',
+      },
+      ru: {
+        default: 'ь',
+        shift: 'Ь',
+      },
+    },
+    id: 'KeyM',
   },
-  Comma: {
-    symbol: ',',
-    shiftSymbol: '<',
-    ru: 'б',
+  comma: {
+    type: buttonTypes.printSymbol,
+    text: {
+      en: {
+        default: ',',
+        shift: '<',
+      },
+      ru: {
+        default: 'б',
+        shift: 'Б',
+      },
+    },
+    id: 'Comma',
   },
-  Period: {
-    symbol: '.',
-    shiftSymbol: '>',
-    ru: 'ю',
+  period: {
+    type: buttonTypes.printSymbol,
+    text: {
+      en: {
+        default: '.',
+        shift: '>',
+      },
+      ru: {
+        default: 'ю',
+        shift: 'Ю',
+      },
+    },
+    id: 'Period',
   },
-  Control: {
+  control: {
+    type: buttonTypes.control,
     text: 'Control',
+    id: 'Control', 
   },
-  Meta: {
+  meta: {
+    type: buttonTypes.meta,
     text: 'Win',
+    id: 'Meta', 
   },
-  Alt: {
+  alt: {
+    type: buttonTypes.alt,
     text: 'Alt',
+    id: 'Alt', 
+  },
+  space: {
+    type: buttonTypes.spacebar,
+    text: '',
+    id: 'Space', 
   },
 };
 
-
-
-
 const config = [
   [
-    {
-      type: 'printSymbolLetter',
-      text: keyboardMap.backquote,
-      id: 'Backquote',
-    },
-    {
-      type: 'printDigit',
-      text: keyboardMap.Digit1,
-      id: 'Digit1',
-    },
-    {
-      type: 'printDigit',
-      text: keyboardMap.Digit2,
-      id: 'Digit2',
-    },
-    {
-      type: 'printDigit',
-      text: keyboardMap.Digit3,
-      id: 'Digit3',
-    },
-    {
-      type: 'printDigit',
-      text: keyboardMap.Digit4,
-      id: 'Digit4',
-    },
-    {
-      type: 'printDigit',
-      text: keyboardMap.Digit5,
-      id: 'Digit5',
-    },
-    {
-      type: 'printDigit',
-      text: keyboardMap.Digit6,
-      id: 'Digit6',
-    },
-    {
-      type: 'printDigit',
-      text: keyboardMap.Digit7,
-      id: 'Digit7',
-    },
-    {
-      type: 'printDigit',
-      text: keyboardMap.Digit8,
-      id: 'Digit8',
-    },
-    {
-      type: 'printDigit',
-      text: keyboardMap.Digit9,
-      id: 'Digit9',
-    },
-    {
-      type: 'printDigit',
-      text: keyboardMap.Digit0,
-      id: 'Digit0',
-    },
-    {
-      type: 'printSymbol',
-      text: keyboardMap.Minus,
-      id: 'Minus',
-    },
-    {
-      type: 'printSymbol',
-      text: keyboardMap.Equal,
-      id: 'Equal',
-    },
-    {
-      type: 'Backspace',
-      text: 'Backspace',
-      id: 'Backspace',
-    },
+    buttonsConfig.backquote,
+    buttonsConfig.digit1,
+    buttonsConfig.digit2,
+    buttonsConfig.digit3,
+    buttonsConfig.digit4,
+    buttonsConfig.digit5,
+    buttonsConfig.digit6,
+    buttonsConfig.digit7,
+    buttonsConfig.digit8,
+    buttonsConfig.digit9,
+    buttonsConfig.digit0,
+    buttonsConfig.minus,
+    buttonsConfig.equal,
+    buttonsConfig.backspace,
   ],
   [
-    {
-      type: 'Tab',
-      text: 'Tab',
-      id: 'Tab',
-    },
-    {
-      type: 'printLetter',
-      text: keyboardMap.q,
-      id: 'KeyQ',
-    },
-    {
-      type: 'printLetter',
-      text: keyboardMap.w,
-      id: 'KeyW',
-    },
-    {
-      type: 'printLetter',
-      text: keyboardMap.e,
-      id: 'KeyE',
-    },
-    {
-      type: 'printLetter',
-      text: keyboardMap.r,
-      id: 'KeyR',
-    },
-    {
-      type: 'printLetter',
-      text: keyboardMap.t,
-      id: 'KeyT',
-    },
-    {
-      type: 'printLetter',
-      text: keyboardMap.y,
-      id: 'KeyY',
-    },
-    {
-      type: 'printLetter',
-      text: keyboardMap.u,
-      id: 'KeyU',
-    },
-    {
-      type: 'printLetter',
-      text: keyboardMap.i,
-      id: 'KeyI',
-    },
-    {
-      type: 'printLetter',
-      text: keyboardMap.o,
-      id: 'KeyO',
-    },
-    {
-      type: 'printLetter',
-      text: keyboardMap.p,
-      id: 'KeyP',
-    },
-    {
-      type: 'printSymbolLetter',
-      text: keyboardMap.BracketLeft,
-      id: 'BracketLeft',
-    },
-    {
-      type: 'printSymbolLetter',
-      text: keyboardMap.BracketRight,
-      id: 'BracketRight',
-    },
-    {
-      type: 'printSymbol',
-      text: keyboardMap.Backslash,
-      id: 'Backslash',
-    },
-    {
-      type: 'printSymbol',
-      text: keyboardMap.Slash,
-      id: 'Slash',
-    },
+    buttonsConfig.tab,
+    buttonsConfig.keyq,
+    buttonsConfig.keyw,
+    buttonsConfig.keye,
+    buttonsConfig.keyr,
+    buttonsConfig.keyt,
+    buttonsConfig.keyy,
+    buttonsConfig.keyu,
+    buttonsConfig.keyi,
+    buttonsConfig.keyo,
+    buttonsConfig.keyp,
+    buttonsConfig.bracketleft,
+    buttonsConfig.bracketright,
+    buttonsConfig.backslash,
+    buttonsConfig.slash,
   ],
   [
-    {
-      type: 'capsLock',
-      text: 'Caps Lock',
-      id: 'CapsLock',
-    },
-    {
-      type: 'printLetter',
-      text: keyboardMap.a,
-      id: 'KeyA',
-    },
-    {
-      type: 'printLetter',
-      text: keyboardMap.s,
-      id: 'KeyS',
-    },
-    {
-      type: 'printLetter',
-      text: keyboardMap.s,
-      id: 'KeyS',
-    },
-    {
-      type: 'printLetter',
-      text: keyboardMap.d,
-      id: 'KeyD',
-    },
-    {
-      type: 'printLetter',
-      text: keyboardMap.f,
-      id: 'KeyF',
-    },
-    {
-      type: 'printLetter',
-      text: keyboardMap.g,
-      id: 'KeyG',
-    },
-    {
-      type: 'printLetter',
-      text: keyboardMap.h,
-      id: 'KeyH',
-    },
-    {
-      type: 'printLetter',
-      text: keyboardMap.j,
-      id: 'KeyJ',
-    },
-    {
-      type: 'printLetter',
-      text: keyboardMap.k,
-      id: 'KeyK',
-    },
-    {
-      type: 'printLetter',
-      text: keyboardMap.l,
-      id: 'KeyL',
-    },
-    {
-      type: 'printLetter',
-      text: keyboardMap.l,
-      id: 'KeyL',
-    },
-    {
-      type: 'printSymbolLetter',
-      text: keyboardMap.Semicolon,
-      id: 'Semicolon',
-    },
-    {
-      type: 'printSymbolLetter',
-      text: keyboardMap.Quote,
-      id: 'Quote',
-    },
-    {
-      type: 'Enter',
-      text: 'Enter',
-      id: 'Enter',
-    },
+    buttonsConfig.capslock,
+    buttonsConfig.keya,
+    buttonsConfig.keys,
+    buttonsConfig.keyd,
+    buttonsConfig.keyf,
+    buttonsConfig.keyg,
+    buttonsConfig.keyh,
+    buttonsConfig.keyj,
+    buttonsConfig.keyk,
+    buttonsConfig.keyl,
+    buttonsConfig.semicolon,
+    buttonsConfig.quote,
+    buttonsConfig.enter,
   ],
   [
-    {
-      type: 'Shift',
-      text: 'Shift',
-      id: 'Shift',
-    },
-    {
-      type: 'printLetter',
-      text: keyboardMap.z,
-      id: 'KeyZ',
-    },
-    {
-      type: 'printLetter',
-      text: keyboardMap.x,
-      id: 'KeyX',
-    },
-    {
-      type: 'printLetter',
-      text: keyboardMap.c,
-      id: 'KeyC',
-    },
-    {
-      type: 'printLetter',
-      text: keyboardMap.v,
-      id: 'KeyV',
-    },
-    {
-      type: 'printLetter',
-      text: keyboardMap.b,
-      id: 'KeyB',
-    },
-    {
-      type: 'printLetter',
-      text: keyboardMap.n,
-      id: 'KeyN',
-    },
-    {
-      type: 'printLetter',
-      text: keyboardMap.m,
-      id: 'KeyM',
-    },
-    {
-      type: 'printSymbolLetter',
-      text: keyboardMap.Comma,
-      id: 'Comma',
-    },
-    {
-      type: 'printSymbolLetter',
-      text: keyboardMap.Period,
-      id: 'Period',
-    },
-    {
-      type: 'Shift',
-      text: 'Shift',
-      id: 'Shift',
-    },
+    buttonsConfig.shift,
+    buttonsConfig.keyz,
+    buttonsConfig.keyx,
+    buttonsConfig.keyc,
+    buttonsConfig.keyv,
+    buttonsConfig.keyb,
+    buttonsConfig.keyn,
+    buttonsConfig.keym,
+    buttonsConfig.comma,
+    buttonsConfig.period,
+    buttonsConfig.shift,
   ],
   [
-    {
-      type: 'Control',
-      text: 'Control',
-      id: 'Control', 
-    },
-    {
-      type: 'Win',
-      text: 'Win',
-      id: 'Meta', 
-    },
-    {
-      type: 'Alt',
-      text: 'Alt',
-      id: 'Alt', 
-    },
-    {
-      type: 'Spacebar',
-      text: '',
-      id: 'Space', 
-    },
-    {
-      type: 'Alt',
-      text: 'Alt',
-      id: 'Alt', 
-    },
-    {
-      type: 'Win',
-      text: 'Win',
-      id: 'Meta', 
-    },
-    {
-      type: 'Control',
-      text: 'Control',
-      id: 'Control', 
-    },
-
+    buttonsConfig.control,
+    buttonsConfig.meta,
+    buttonsConfig.alt,
+    buttonsConfig.space,
+    buttonsConfig.alt,
+    buttonsConfig.meta,
+    buttonsConfig.control,
   ],
-  
 ];
 
 
@@ -577,10 +816,12 @@ class Keyboard {
   constructor(language, config) {
       this.language = language;
       this.isCapsLockOn = false;
+      this.isShiftOn = false;
+      this.config = config;
 
       this._createKeyboardContainer();
 
-      config.forEach(rowConfig => this._createRow(rowConfig));
+      this.config.forEach(rowConfig => this._createRow(rowConfig));
       
       this._addKeyboardListener();
   }
@@ -589,6 +830,9 @@ class Keyboard {
     const keyboardContainer = document.createElement('div');
 
     keyboardContainer.className = 'keyboard-container';
+    keyboardContainer.onclick = (event) => {
+      const keyCode = event.target.id;
+    }
 
     document.body.appendChild(keyboardContainer);
   }
@@ -614,43 +858,34 @@ class Keyboard {
     let btn;
 
     switch(btnConfig.type) {
-      case 'printLetter':
-        btn = this._createLetterButton(btnConfig);
-        break;
-      case 'capsLock':
-        btn = this._createCapsLockButton(btnConfig);
-        break;
-      case 'printDigit':
-        btn = this._createDigitButton(btnConfig);
-        break;
-      case 'printSymbol':
+      case buttonTypes.printSymbol:
         btn = this._createSymbolButton(btnConfig);
         break;
-      case 'printSymbolLetter':
-        btn = this._createSymbolLetterButton(btnConfig);
+      case buttonTypes.capsLock:
+        btn = this._createCapsLockButton(btnConfig);
         break;
-      case 'Backspace':
+      case buttonTypes.backspace:
         btn = this._createBackspaceButton(btnConfig);
         break;
-      case 'Tab':
+      case buttonTypes.tab:
         btn = this._creatTabButton(btnConfig);
         break;
-      case 'Enter':
+      case buttonTypes.enter:
         btn = this._creatEnterButton(btnConfig);
         break;
-      case 'Shift':
+      case buttonTypes.shift:
         btn = this._creatShiftButton(btnConfig);
         break;
-      case 'Control':
-          btn = this._creatControlButton(btnConfig);
-          break;
-      case 'Meta':
+      case buttonTypes.control:
+        btn = this._creatControlButton(btnConfig);
+        break;
+      case buttonTypes.meta:
           btn = this._creatMetaButton(btnConfig);
           break;
-      case 'Alt':
+      case buttonTypes.alt:
         btn = this._creatAltButton(btnConfig);
         break;
-      case 'Spacebar':
+      case buttonTypes.spacebar:
         btn = this._creatSpacebarButton(btnConfig);
         break;
     }
@@ -658,65 +893,23 @@ class Keyboard {
     return btn;
   }
 
-  _createLetterButton(btnConfig) {
-    const btn = document.createElement('button');
-
-    btn.innerText =  this.language === 'EN' ? btnConfig.text.en : btnConfig.text.ru;
-    btn.id = btnConfig.id;
-
-    btn.onclick = () => {
-      this._printLetter(btnConfig.text);
-    };
-
-    return btn;
-  }
-
-  _createDigitButton(btnConfig) {
-    const btn = document.createElement('button');
-
-    btn.innerText =  btnConfig.text.digit;
-    btn.id = btnConfig.id;
-
-    btn.onclick = () => {
-      this._printLetter(btnConfig.text);
-    };
-
-    return btn;
-  }
-
   _createSymbolButton(btnConfig) {
     const btn = document.createElement('button');
 
-    btn.innerText =  btnConfig.text.symbol;
+    btn.innerText = this.language === 'EN'
+      ? btnConfig.text.en.default
+      : btnConfig.text.ru.default;
     btn.id = btnConfig.id;
 
     btn.onclick = () => {
-      this._printLetter(btnConfig.text);
+      this._printSymbol(btnConfig.text);
     };
 
     return btn;
   }
 
-  _createSymbolLetterButton(btnConfig) {
-    const btn = document.createElement('button');
-
-    btn.innerText =  btnConfig.text.symbol;
-    btn.id = btnConfig.id;
-
-    btn.onclick = () => {
-      this._printLetter(btnConfig.text);
-    };
-
-    return btn;
-  }
-
-  _printLetter(text) {
-    const letter = this.language === 'EN' ? text.en : text.ru;
-    const output = this.isCapsLockOn ? letter.toUpperCase() : letter;
-
-    document.querySelector('.textarea').value += output;
-
-    //return output;
+  __printSymbol(btnConfig) {
+    
   }
 
   _createCapsLockButton(btnConfig) {
@@ -753,6 +946,10 @@ class Keyboard {
 
     btn.innerText = btnConfig.text;
     btn.id = btnConfig.id;
+
+    btn.onclick = () => {
+      this.isShiftOn = true;
+    };
 
     return btn;
   }
@@ -809,50 +1006,49 @@ class Keyboard {
 
   _addKeyboardListener() {
     document.onkeydown = (event) => {
-     
-      let button = event.key;
-
-      this._printLetter(keyboardMap[button]);
-      this._selectButton(event.code);
       
-      alert(event.key);
+     
+      let button = event.code;
+
+      this._printLetter(buttonConfig[button]);
+      this._selectButton(button);
+      
     }
 
     document.onkeyup = (event) => {
       
-      const button = event.key;
+      let button = event.code;
 
-      this._printLetter(keyboardMap[button]);
-      this._deselectButton(event.code);
+      this._printLetter(buttonConfig[button]);
+      this._deselectButton(button);
       
     }
   }
 
-  _selectButton(id) {
+  _printLetter(text) { // TODO: check
+    const letter = this.language === 'EN' ? text.en : text.ru;
+    const output = this.isCapsLockOn ? letter.toUpperCase() : letter;
+
+    document.querySelector('.textarea').value += output;
+
+  }
+
+  _selectButton(id) { // TODO check
     const btn = document.getElementById(id);
 
     btn.classList.add('btn-selected');
   }
 
-  _deselectButton(id) {
+  _deselectButton(id) { // TODO check
     const btn = document.getElementById(id);
 
     btn.classList.remove('btn-selected');
   }
 
-  // _createButton() {
-  //   const btn = document.createElement('button');
-
-  //   btn.textContent = this.language;
-  //   btn.onclick = this._changeLanguage.bind(this);
-
-  //   document.body.appendChild(btn);
-  // }
 
 //   _changeLanguage(event) {
 
-//     if (event.key === 'Shift' && event.key === 'Control'){
-//       this.language = this.language === 'EN' ? 'RU' : 'EN';
+//     this.language = this.language === 'EN' ? 'RU' : 'EN';
 //     localStorage.setItem('language', this.language);
 //     }
     
