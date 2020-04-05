@@ -568,10 +568,15 @@ const buttonsConfig = {
     text: 'Enter',
     id: 'Enter',
   },
-  Shift: {
+  ShiftLeft: {
     type: buttonTypes.shift,
     text: 'Shift',
-    id: 'Shift',
+    id: 'ShiftLeft',
+  },
+  ShiftRight: {
+    type: buttonTypes.shift,
+    text: 'Shift',
+    id: 'ShiftRight',
   },
   KeyZ: {
     type: buttonTypes.printSymbol,
@@ -699,20 +704,35 @@ const buttonsConfig = {
     },
     id: 'Period',
   },
-  Control: {
+  ControlLeft: {
     type: buttonTypes.control,
     text: 'Control',
-    id: 'Control', 
+    id: 'ControlLeft', 
   },
-  Meta: {
+  ControlRight: {
+    type: buttonTypes.control,
+    text: 'Control',
+    id: 'ControlRight', 
+  },
+  MetaLeft: {
     type: buttonTypes.meta,
     text: 'Win',
-    id: 'Meta', 
+    id: 'MetaLeft', 
   },
-  Alt: {
+  MetaRight: {
+    type: buttonTypes.meta,
+    text: 'Win',
+    id: 'MetaRight', 
+  },
+  AltLeft: {
     type: buttonTypes.alt,
     text: 'Alt',
-    id: 'Alt', 
+    id: 'AltLeft', 
+  },
+  AltRight: {
+    type: buttonTypes.alt,
+    text: 'Alt',
+    id: 'AltRight', 
   },
   Space: {
     type: buttonTypes.spacebar,
@@ -771,7 +791,7 @@ const config = [
     buttonsConfig.Enter,
   ],
   [
-    buttonsConfig.Shift,
+    buttonsConfig.ShiftLeft,
     buttonsConfig.KeyZ,
     buttonsConfig.KeyX,
     buttonsConfig.KeyC,
@@ -781,16 +801,16 @@ const config = [
     buttonsConfig.KeyM,
     buttonsConfig.Comma,
     buttonsConfig.Period,
-    buttonsConfig.Shift,
+    buttonsConfig.ShiftRight,
   ],
   [
-    buttonsConfig.Control,
-    buttonsConfig.Meta,
-    buttonsConfig.Alt,
+    buttonsConfig.ControlLeft,
+    buttonsConfig.MetaLeft,
+    buttonsConfig.AltLeft,
     buttonsConfig.Space,
-    buttonsConfig.Alt,
-    buttonsConfig.Meta,
-    buttonsConfig.Control,
+    buttonsConfig.AltRight,
+    buttonsConfig.MetaRight,
+    buttonsConfig.ControlRight,
   ],
 ];
 
@@ -817,7 +837,7 @@ class Keyboard {
 
       config.forEach(rowConfig => this._createRow(rowConfig));
       
-      // this._addKeyboardListener();
+      this._addKeyboardListener();
   }
 
   _createKeyboardContainer() {
@@ -898,15 +918,15 @@ class Keyboard {
     btn.id = btnConfig.id;
     btn.setAttribute('symbol-btn', '');
 
-    btn.onclick = () => {
-      this._printSymbol(btnConfig.text);
-    };
+    btn.onclick = this._printSymbol;
 
     return btn;
   }
 
-  _printSymbol(btnConfig) {
-    
+  _printSymbol(event) {
+    const output = event.target.innerText;
+
+    document.querySelector('.textarea').value += output;
   }
 
   _createCapsLockButton(btnConfig) {
@@ -1009,26 +1029,30 @@ class Keyboard {
     this._changeButtonText();
   }
 
-  _onShiftClick() {
-    const index = this.selectedButtons.indexOf('Shift'); // move to separate const
+  _onShiftClick(event) {
+    const isShiftOn = this.selectedButtons.includes('ShiftLeft') || this.selectedButtons.includes('ShiftRight'); // move to separate const
 
-    if (index === -1) { 
-      this.selectedButtons.push('Shift');
+    if (isShiftOn) { 
+      this.selectedButtons = this.selectedButtons.filter(button => button !== 'ShiftLeft' && button !== 'ShiftRight');
     } else {
-      this.selectedButtons.splice(index, 1);
+      const code = event.target.id;
+
+      this.selectedButtons.push(code);
     }
 
     this._checkShiftCtrlCombination();
     this._changeButtonText();
   }
 
-  _onCtrlClick() {
-    const index = this.selectedButtons.indexOf('Control') // move to separate const
+  _onCtrlClick(event) {
+    const isCtrlOn = this.selectedButtons.includes('ControlLeft') || this.selectedButtons.includes('ControlRight'); // move to separate const
 
-    if (index === -1) { 
-      this.selectedButtons.push('Control');
+    if (isCtrlOn) { 
+      this.selectedButtons = this.selectedButtons.filter(button => button !== 'ControlLeft' && button !== 'ControlRight');
     } else {
-      this.selectedButtons.splice(index, 1);
+      const code = event.target.id;
+
+      this.selectedButtons.push(code);
     }
 
     this._checkShiftCtrlCombination();
@@ -1036,29 +1060,31 @@ class Keyboard {
   }
 
   _checkShiftCtrlCombination() {
-    let isShiftOn = this.selectedButtons.includes('Shift');
-    let isCtrlOn = this.selectedButtons.includes('Control');
-    const shiftBtnClassList = this.keyboardContainer.querySelector('#Shift').classList;
-    const ctrlBtnClassList = this.keyboardContainer.querySelector('#Control').classList;
+    let isShiftOn = this.selectedButtons.includes('ShiftLeft') || this.selectedButtons.includes('ShiftRight'); // move to separate const
+    let isCtrlOn = this.selectedButtons.includes('ControlLeft') || this.selectedButtons.includes('ControlRight'); // move to separate const
 
     if (isShiftOn && isCtrlOn) {
       this._changeLanguage();
 
-      this.selectedButtons = this.selectedButtons.filter(button => button !== 'Shift' && button !== 'Control');
-      isShiftOn = false;
-      isCtrlOn = false;
+      this.selectedButtons = this.selectedButtons.filter(
+        button => button !== 'ShiftLeft' && button !== 'ShiftRight' && button !== 'ControlLeft' && button !== 'ControlRight'
+      );
     }
 
-    if (isShiftOn) {
-      shiftBtnClassList.add('btn-selected');
-    } else {
-      shiftBtnClassList.remove('btn-selected');
-    }
+    this._toggleButton('ShiftLeft'); // move to separate const
+    this._toggleButton('ShiftRight'); // move to separate const
+    this._toggleButton('ControlLeft'); // move to separate const
+    this._toggleButton('ControlRight'); // move to separate const
+  }
 
-    if (isCtrlOn) {
-      ctrlBtnClassList.add('btn-selected');
+  _toggleButton(buttonId) {
+    const isButtonOn = this.selectedButtons.includes(buttonId);
+    const buttonClassList = this.keyboardContainer.querySelector(`#${buttonId}`).classList;
+
+    if (isButtonOn) {
+      buttonClassList.add('btn-selected');
     } else {
-      ctrlBtnClassList.remove('btn-selected');
+      buttonClassList.remove('btn-selected');
     }
   }
 
@@ -1069,7 +1095,7 @@ class Keyboard {
 
   _changeButtonText() {
     const isCapsLockOn = this.selectedButtons.includes('CapsLock'); // move to separate const
-    const isShiftOn = this.selectedButtons.includes('Shift'); // move to separate const
+    const isShiftOn = this.selectedButtons.includes('ShiftLeft') || this.selectedButtons.includes('ShiftRight'); // move to separate const
     const languageKey = this.language === 'EN' ? 'en' : 'ru';
 
     const symbolBtns = this.keyboardContainer.querySelectorAll('button[symbol-btn]');
@@ -1077,16 +1103,6 @@ class Keyboard {
     symbolBtns.forEach(button => {
       const id = button.id;
       const config = buttonsConfig[id].text[languageKey];
-
-      // if (this.isShiftOn && this.isCapsLockOn) {
-      //   button.innerText = config.text[languageKey].shift.toLowerCase();
-      // } else if (this.isShiftOn && !this.isCapsLockOn) {
-      //   button.innerText = config.text[languageKey].shift;
-      // } else if (!this.isShiftOn) {
-
-      // } else { // when this.isShiftOn = false and this.isCapsLockOn = false
-      //   button.innerText = config.text[languageKey].default;
-      // }
 
       if (isShiftOn) {
         if (isCapsLockOn) {
@@ -1105,32 +1121,25 @@ class Keyboard {
   }
 
   _addKeyboardListener() {
-    this.keyboardContainer.onkeydown = (event) => {
-      
-     
-      let button = event.code;
+    document.onkeydown = ({ code }) => {
+      const config = buttonsConfig[code];
+      // const buttons
+      debugger;
 
-      this._printLetter(buttonConfig[button]);
-      this._selectButton(button);
-      
-    }
-
-    this.keyboardContainer.onkeyup = (event) => {
-      
-      let button = event.code;
-
-      this._printLetter(buttonConfig[button]);
-      this._deselectButton(button);
+      // // this._printLetter(buttonConfig[button]);
+      // this._selectButton(button);
       
     }
-  }
 
-  _printLetter(text) { // TODO: check
-    const letter = this.language === 'EN' ? text.en : text.ru;
-    const output = this.isCapsLockOn ? letter.toUpperCase() : letter;
+    document.onkeyup = ({ code }) => {
+      debugger;
+      
+      // let button = event.code;
 
-    document.querySelector('.textarea').value += output;
-
+      // // this._printLetter(buttonConfig[button]);
+      // this._deselectButton(button);
+      
+    }
   }
 
   _selectButton(id) { // TODO check
