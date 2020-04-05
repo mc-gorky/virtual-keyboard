@@ -16,7 +16,7 @@ const buttonTypes =  {
 }
 
 const buttonsConfig = {
-  backquote: {
+  Backquote: {
     type: buttonTypes.printSymbol,
     text: {
       en: {
@@ -30,7 +30,7 @@ const buttonsConfig = {
     },
     id: 'Backquote',
   },
-  digit1: {
+  Digit1: {
     type: buttonTypes.printSymbol,
     text: {
       en: {
@@ -44,7 +44,7 @@ const buttonsConfig = {
     },
     id: 'Digit1',
   },
-  digit2: {
+  Digit2: {
     type: buttonTypes.printSymbol,
     text: {
       en: {
@@ -58,7 +58,7 @@ const buttonsConfig = {
   },
     id: 'Digit2',
   },
-  digit3: {
+  Digit3: {
     type: buttonTypes.printSymbol,
     text: {
       en: {
@@ -72,7 +72,7 @@ const buttonsConfig = {
     },
     id: 'Digit3',
   },
-  digit4: {
+  Digit4: {
     type: buttonTypes.printSymbol,
     text: {
       en: {
@@ -86,7 +86,7 @@ const buttonsConfig = {
     },
     id: 'Digit4',
   },
-  digit5: {
+  Digit5: {
     type: buttonTypes.printSymbol,
     text: {
       en: {
@@ -100,7 +100,7 @@ const buttonsConfig = {
     },
     id: 'Digit5',
   },
-  digit6: {
+  Digit6: {
     type: buttonTypes.printSymbol,
     text: {
       en: {
@@ -114,7 +114,7 @@ const buttonsConfig = {
     },
     id: 'Digit6',
   },
-  digit7: {
+  Digit7: {
     type: buttonTypes.printSymbol,
     text: {
       en: {
@@ -128,7 +128,7 @@ const buttonsConfig = {
     },
     id: 'Digit7',
   },
-  digit8: {
+  Digit8: {
     type: buttonTypes.printSymbol,
     text: {
       en: {
@@ -142,7 +142,7 @@ const buttonsConfig = {
     },
     id: 'Digit8',
   },
-  digit9: {
+  Digit9: {
     type: buttonTypes.printSymbol,
     text: {
       en: {
@@ -156,7 +156,7 @@ const buttonsConfig = {
     },
     id: 'Digit9',
   },
-  digit0: {
+  Digit0: {
     type: buttonTypes.printSymbol,
     text: {
       en: {
@@ -170,7 +170,7 @@ const buttonsConfig = {
     },
     id: 'Digit0',
   },
-  minus: {
+  Minus: {
     type: buttonTypes.printSymbol,
     text: {
       en: {
@@ -184,7 +184,7 @@ const buttonsConfig = {
     },
     id: 'Minus',
   },
-  equal: {
+  Equal: {
       type: buttonTypes.printSymbol,
       text: {
         en: {
@@ -198,17 +198,17 @@ const buttonsConfig = {
       },
       id: 'Equal',
   },
-  backspace: {
+  Backspace: {
     type: buttonTypes.backspace,
     text: 'Backspace',
     id: 'Backspace',
   },
-  tab: {
+  Tab: {
     type: buttonTypes.tab,
     text: 'Tab',
     id: 'Tab',
   },
-  keyq: {
+  KeyQ: {
     type: buttonTypes.printSymbol,
     text: {
       en: {
@@ -222,7 +222,7 @@ const buttonsConfig = {
     },
     id: 'KeyQ',
   },
-  keyw: {
+  KeyW: {
     type: buttonTypes.printSymbol,
     text: {
       en: {
@@ -236,7 +236,7 @@ const buttonsConfig = {
     },
     id: 'KeyW',
   },
-  keye: {
+  KeyE: {
     type: buttonTypes.printSymbol,
     text: {
       en: {
@@ -250,7 +250,7 @@ const buttonsConfig = {
     },
     id: 'KeyE',
   },
-  keyr: {
+  KeyR: {
       type: buttonTypes.printSymbol,
       text: {
         en: {
@@ -264,7 +264,7 @@ const buttonsConfig = {
       },
       id: 'KeyR',
     },
-  keyt: {
+  KeyT: {
     type: buttonTypes.printSymbol,
     text: {
       en: {
@@ -278,7 +278,7 @@ const buttonsConfig = {
     },
     id: 'KeyT',
   },
-  keyy: {
+  KeyY: {
     type: buttonTypes.printSymbol,
     text: {
       en: {
@@ -292,7 +292,7 @@ const buttonsConfig = {
     },
     id: 'KeyY',
   },
-  keyu: {
+  KeyU: {
     type: buttonTypes.printSymbol,
     text: {
       en: {
@@ -306,7 +306,7 @@ const buttonsConfig = {
     },
     id: 'KeyU',
   },
-  keyi: {
+  KeyI: {
     type: buttonTypes.printSymbol,
     text: {
       en: {
@@ -320,7 +320,7 @@ const buttonsConfig = {
     },
     id: 'KeyI',
   },
-  keyo: {
+  KeyO: {
     type: buttonTypes.printSymbol,
     text: {
       en: {
@@ -334,7 +334,7 @@ const buttonsConfig = {
     },
     id: 'KeyO',
   },
-  keyp: {
+  KeyP: {
     type: buttonTypes.printSymbol,
     text: {
       en: {
@@ -348,7 +348,7 @@ const buttonsConfig = {
     },
     id: 'KeyP',
   },
-  bracketleft: {
+  BracketLeft: {
     type: buttonTypes.printSymbol,
     text: {
       en: {
@@ -362,7 +362,7 @@ const buttonsConfig = {
     },
     id: 'BracketLeft',
   },
-  bracketright: {
+  BracketRight: {
     type: buttonTypes.printSymbol,
     text: {
       en: {
@@ -376,7 +376,7 @@ const buttonsConfig = {
     },
     id: 'BracketRight',
   },
-  backslash: {
+  Backslash: {
     type: buttonTypes.printSymbol,
     text: {
       en: {
@@ -390,7 +390,7 @@ const buttonsConfig = {
     },
     id: 'Backslash',
   },
-  slash: {
+  Slash: {
     type: buttonTypes.printSymbol,
     text: {
       en: {
@@ -404,12 +404,12 @@ const buttonsConfig = {
     },
     id: 'Slash',
   },
-  capslock: {
+  CapsLock: {
     type: buttonTypes.capsLock,
     text: 'Caps Lock',
     id: 'CapsLock',
   },
-  keya: {
+  KeyA: {
     type: buttonTypes.printSymbol,
     text: {
       en: {
@@ -423,7 +423,7 @@ const buttonsConfig = {
     },
     id: 'KeyA',
   },
-  keys: {
+  KeyS: {
     type: buttonTypes.printSymbol,
     text: {
       en: {
@@ -437,7 +437,7 @@ const buttonsConfig = {
     },
     id: 'KeyS',
   },
-  keyd:{
+  KeyD:{
     type: buttonTypes.printSymbol,
     text: {
       en: {
@@ -451,7 +451,7 @@ const buttonsConfig = {
     },
     id: 'KeyD',
   },
-  keyf: {
+  KeyF: {
     type: buttonTypes.printSymbol,
     text: {
       en: {
@@ -465,7 +465,7 @@ const buttonsConfig = {
     },
     id: 'KeyF',
   },
-  keyg: {
+  KeyG: {
     type: buttonTypes.printSymbol,
     text: {
       en: {
@@ -479,7 +479,7 @@ const buttonsConfig = {
     },
     id: 'KeyG',
   },
-  keyh: {
+  KeyH: {
     type: buttonTypes.printSymbol,
     text: {
       en: {
@@ -493,7 +493,7 @@ const buttonsConfig = {
     },
     id: 'KeyH',
   },
-  keyj: {
+  KeyJ: {
     type: buttonTypes.printSymbol,
     text: {
       en: {
@@ -507,7 +507,7 @@ const buttonsConfig = {
     },
     id: 'KeyJ',
   },
-  keyk: {
+  KeyK: {
     type: buttonTypes.printSymbol,
     text: {
       en: {
@@ -521,7 +521,7 @@ const buttonsConfig = {
     },
     id: 'KeyK',
   },
-  keyl: {
+  KeyL: {
     type: buttonTypes.printSymbol,
     text: {
       en: {
@@ -535,7 +535,7 @@ const buttonsConfig = {
     },
     id: 'KeyL',
   },
-  semicolon: {
+  Semicolon: {
     type: buttonTypes.printSymbol,
     text: {
       en: {
@@ -549,7 +549,7 @@ const buttonsConfig = {
     },
     id: 'Semicolon',
   },
-  quote: {
+  Quote: {
     type: buttonTypes.printSymbol,
     text: {
       en: {
@@ -563,17 +563,17 @@ const buttonsConfig = {
     },
     id: 'Quote',
   },
-  enter: {
+  Enter: {
     type: buttonTypes.enter,
     text: 'Enter',
     id: 'Enter',
   },
-  shift: {
+  Shift: {
     type: buttonTypes.shift,
     text: 'Shift',
     id: 'Shift',
   },
-  keyz: {
+  KeyZ: {
     type: buttonTypes.printSymbol,
     text: {
       en: {
@@ -587,7 +587,7 @@ const buttonsConfig = {
     },
     id: 'KeyZ',
   },
-  keyx: {
+  KeyX: {
     type: buttonTypes.printSymbol,
     text:  {
       en: {
@@ -601,7 +601,7 @@ const buttonsConfig = {
     },
     id: 'KeyX',
   },
-  keyc: {
+  KeyC: {
     type: buttonTypes.printSymbol,
     text: {
       en: {
@@ -615,7 +615,7 @@ const buttonsConfig = {
     },
     id: 'KeyC',
   },
-  keyv: {
+  KeyV: {
     type: buttonTypes.printSymbol,
     text: {
       en: {
@@ -629,7 +629,7 @@ const buttonsConfig = {
     },
     id: 'KeyV',
   },
-  keyb: {
+  KeyB: {
     type: buttonTypes.printSymbol,
     text: {
       en: {
@@ -643,7 +643,7 @@ const buttonsConfig = {
     },
     id: 'KeyB',
   },
-  keyn: {
+  KeyN: {
     type: buttonTypes.printSymbol,
     text: {
       en: {
@@ -657,7 +657,7 @@ const buttonsConfig = {
     },
     id: 'KeyN',
   },
-  keym: {
+  KeyM: {
     type: buttonTypes.printSymbol,
     text: {
       en: {
@@ -671,7 +671,7 @@ const buttonsConfig = {
     },
     id: 'KeyM',
   },
-  comma: {
+  Comma: {
     type: buttonTypes.printSymbol,
     text: {
       en: {
@@ -685,7 +685,7 @@ const buttonsConfig = {
     },
     id: 'Comma',
   },
-  period: {
+  Period: {
     type: buttonTypes.printSymbol,
     text: {
       en: {
@@ -699,22 +699,22 @@ const buttonsConfig = {
     },
     id: 'Period',
   },
-  control: {
+  Control: {
     type: buttonTypes.control,
     text: 'Control',
     id: 'Control', 
   },
-  meta: {
+  Meta: {
     type: buttonTypes.meta,
     text: 'Win',
     id: 'Meta', 
   },
-  alt: {
+  Alt: {
     type: buttonTypes.alt,
     text: 'Alt',
     id: 'Alt', 
   },
-  space: {
+  Space: {
     type: buttonTypes.spacebar,
     text: '',
     id: 'Space', 
@@ -723,80 +723,76 @@ const buttonsConfig = {
 
 const config = [
   [
-    buttonsConfig.backquote,
-    buttonsConfig.digit1,
-    buttonsConfig.digit2,
-    buttonsConfig.digit3,
-    buttonsConfig.digit4,
-    buttonsConfig.digit5,
-    buttonsConfig.digit6,
-    buttonsConfig.digit7,
-    buttonsConfig.digit8,
-    buttonsConfig.digit9,
-    buttonsConfig.digit0,
-    buttonsConfig.minus,
-    buttonsConfig.equal,
-    buttonsConfig.backspace,
+    buttonsConfig.Backquote,
+    buttonsConfig.Digit1,
+    buttonsConfig.Digit2,
+    buttonsConfig.Digit3,
+    buttonsConfig.Digit4,
+    buttonsConfig.Digit5,
+    buttonsConfig.Digit6,
+    buttonsConfig.Digit7,
+    buttonsConfig.Digit8,
+    buttonsConfig.Digit9,
+    buttonsConfig.Digit0,
+    buttonsConfig.Minus,
+    buttonsConfig.Equal,
+    buttonsConfig.Backspace,
   ],
   [
-    buttonsConfig.tab,
-    buttonsConfig.keyq,
-    buttonsConfig.keyw,
-    buttonsConfig.keye,
-    buttonsConfig.keyr,
-    buttonsConfig.keyt,
-    buttonsConfig.keyy,
-    buttonsConfig.keyu,
-    buttonsConfig.keyi,
-    buttonsConfig.keyo,
-    buttonsConfig.keyp,
-    buttonsConfig.bracketleft,
-    buttonsConfig.bracketright,
-    buttonsConfig.backslash,
-    buttonsConfig.slash,
+    buttonsConfig.Tab,
+    buttonsConfig.KeyQ,
+    buttonsConfig.KeyW,
+    buttonsConfig.KeyE,
+    buttonsConfig.KeyR,
+    buttonsConfig.KeyT,
+    buttonsConfig.KeyY,
+    buttonsConfig.KeyU,
+    buttonsConfig.KeyI,
+    buttonsConfig.KeyO,
+    buttonsConfig.KeyP,
+    buttonsConfig.BracketLeft,
+    buttonsConfig.BracketRight,
+    buttonsConfig.Backslash,
+    buttonsConfig.Slash,
   ],
   [
-    buttonsConfig.capslock,
-    buttonsConfig.keya,
-    buttonsConfig.keys,
-    buttonsConfig.keyd,
-    buttonsConfig.keyf,
-    buttonsConfig.keyg,
-    buttonsConfig.keyh,
-    buttonsConfig.keyj,
-    buttonsConfig.keyk,
-    buttonsConfig.keyl,
-    buttonsConfig.semicolon,
-    buttonsConfig.quote,
-    buttonsConfig.enter,
+    buttonsConfig.CapsLock,
+    buttonsConfig.KeyA,
+    buttonsConfig.KeyS,
+    buttonsConfig.KeyD,
+    buttonsConfig.KeyF,
+    buttonsConfig.KeyG,
+    buttonsConfig.KeyH,
+    buttonsConfig.KeyJ,
+    buttonsConfig.KeyK,
+    buttonsConfig.KeyL,
+    buttonsConfig.Semicolon,
+    buttonsConfig.Quote,
+    buttonsConfig.Enter,
   ],
   [
-    buttonsConfig.shift,
-    buttonsConfig.keyz,
-    buttonsConfig.keyx,
-    buttonsConfig.keyc,
-    buttonsConfig.keyv,
-    buttonsConfig.keyb,
-    buttonsConfig.keyn,
-    buttonsConfig.keym,
-    buttonsConfig.comma,
-    buttonsConfig.period,
-    buttonsConfig.shift,
+    buttonsConfig.Shift,
+    buttonsConfig.KeyZ,
+    buttonsConfig.KeyX,
+    buttonsConfig.KeyC,
+    buttonsConfig.KeyV,
+    buttonsConfig.KeyB,
+    buttonsConfig.KeyN,
+    buttonsConfig.KeyM,
+    buttonsConfig.Comma,
+    buttonsConfig.Period,
+    buttonsConfig.Shift,
   ],
   [
-    buttonsConfig.control,
-    buttonsConfig.meta,
-    buttonsConfig.alt,
-    buttonsConfig.space,
-    buttonsConfig.alt,
-    buttonsConfig.meta,
-    buttonsConfig.control,
+    buttonsConfig.Control,
+    buttonsConfig.Meta,
+    buttonsConfig.Alt,
+    buttonsConfig.Space,
+    buttonsConfig.Alt,
+    buttonsConfig.Meta,
+    buttonsConfig.Control,
   ],
 ];
-
-
-
-
 
 
 window.onload = () => {
@@ -815,15 +811,13 @@ class App {
 class Keyboard {
   constructor(language, config) {
       this.language = language;
-      this.isCapsLockOn = false;
-      this.isShiftOn = false;
-      this.config = config;
+      this.selectedButtons = [];
 
-      this._createKeyboardContainer();
+      this.keyboardContainer = this._createKeyboardContainer();
 
-      this.config.forEach(rowConfig => this._createRow(rowConfig));
+      config.forEach(rowConfig => this._createRow(rowConfig));
       
-      this._addKeyboardListener();
+      // this._addKeyboardListener();
   }
 
   _createKeyboardContainer() {
@@ -835,6 +829,8 @@ class Keyboard {
     }
 
     document.body.appendChild(keyboardContainer);
+
+    return keyboardContainer;
   }
 
   _createRow(config) {
@@ -851,7 +847,7 @@ class Keyboard {
       }
     });
 
-    document.querySelector('.keyboard-container').append(row);
+    this.keyboardContainer.append(row);
   }
 
   _createButton(btnConfig) {
@@ -900,6 +896,7 @@ class Keyboard {
       ? btnConfig.text.en.default
       : btnConfig.text.ru.default;
     btn.id = btnConfig.id;
+    btn.setAttribute('symbol-btn', '');
 
     btn.onclick = () => {
       this._printSymbol(btnConfig.text);
@@ -908,7 +905,7 @@ class Keyboard {
     return btn;
   }
 
-  __printSymbol(btnConfig) {
+  _printSymbol(btnConfig) {
     
   }
 
@@ -947,9 +944,7 @@ class Keyboard {
     btn.innerText = btnConfig.text;
     btn.id = btnConfig.id;
 
-    btn.onclick = () => {
-      this.isShiftOn = true;
-    };
+    btn.onclick = this._onShiftClick.bind(this);
 
     return btn;
   }
@@ -959,6 +954,8 @@ class Keyboard {
 
     btn.innerText = btnConfig.text;
     btn.id = btnConfig.id;
+
+    btn.onclick = this._onCtrlClick.bind(this);
 
     return btn;
   }
@@ -999,13 +996,116 @@ class Keyboard {
   }
 
   _onCapsLockClick(event) {
-    this.isCapsLockOn = !this.isCapsLockOn;
+    const index = this.selectedButtons.indexOf('CapsLock') // move to separate const
+
+    if (index === -1) { 
+      this.selectedButtons.push('CapsLock');
+    } else {
+      this.selectedButtons.splice(index, 1);
+    }
 
     event.target.classList.toggle('btn-selected');
+
+    this._changeButtonText();
+  }
+
+  _onShiftClick() {
+    const index = this.selectedButtons.indexOf('Shift'); // move to separate const
+
+    if (index === -1) { 
+      this.selectedButtons.push('Shift');
+    } else {
+      this.selectedButtons.splice(index, 1);
+    }
+
+    this._checkShiftCtrlCombination();
+    this._changeButtonText();
+  }
+
+  _onCtrlClick() {
+    const index = this.selectedButtons.indexOf('Control') // move to separate const
+
+    if (index === -1) { 
+      this.selectedButtons.push('Control');
+    } else {
+      this.selectedButtons.splice(index, 1);
+    }
+
+    this._checkShiftCtrlCombination();
+    this._changeButtonText();
+  }
+
+  _checkShiftCtrlCombination() {
+    let isShiftOn = this.selectedButtons.includes('Shift');
+    let isCtrlOn = this.selectedButtons.includes('Control');
+    const shiftBtnClassList = this.keyboardContainer.querySelector('#Shift').classList;
+    const ctrlBtnClassList = this.keyboardContainer.querySelector('#Control').classList;
+
+    if (isShiftOn && isCtrlOn) {
+      this._changeLanguage();
+
+      this.selectedButtons = this.selectedButtons.filter(button => button !== 'Shift' && button !== 'Control');
+      isShiftOn = false;
+      isCtrlOn = false;
+    }
+
+    if (isShiftOn) {
+      shiftBtnClassList.add('btn-selected');
+    } else {
+      shiftBtnClassList.remove('btn-selected');
+    }
+
+    if (isCtrlOn) {
+      ctrlBtnClassList.add('btn-selected');
+    } else {
+      ctrlBtnClassList.remove('btn-selected');
+    }
+  }
+
+  _changeLanguage() {
+    this.language = this.language === 'EN' ? 'RU' : 'EN';
+    localStorage.setItem('language', this.language);
+  }
+
+  _changeButtonText() {
+    const isCapsLockOn = this.selectedButtons.includes('CapsLock'); // move to separate const
+    const isShiftOn = this.selectedButtons.includes('Shift'); // move to separate const
+    const languageKey = this.language === 'EN' ? 'en' : 'ru';
+
+    const symbolBtns = this.keyboardContainer.querySelectorAll('button[symbol-btn]');
+
+    symbolBtns.forEach(button => {
+      const id = button.id;
+      const config = buttonsConfig[id].text[languageKey];
+
+      // if (this.isShiftOn && this.isCapsLockOn) {
+      //   button.innerText = config.text[languageKey].shift.toLowerCase();
+      // } else if (this.isShiftOn && !this.isCapsLockOn) {
+      //   button.innerText = config.text[languageKey].shift;
+      // } else if (!this.isShiftOn) {
+
+      // } else { // when this.isShiftOn = false and this.isCapsLockOn = false
+      //   button.innerText = config.text[languageKey].default;
+      // }
+
+      if (isShiftOn) {
+        if (isCapsLockOn) {
+          button.innerText = config.shift.toLowerCase();
+        } else {
+          button.innerText = config.shift;
+        }
+      } else {
+        if (isCapsLockOn) {
+          button.innerText = config.default.toUpperCase();
+        } else {
+          button.innerText = config.default;
+        }
+      }
+    });
   }
 
   _addKeyboardListener() {
-    document.onkeydown = (event) => {
+    this.keyboardContainer.onkeydown = (event) => {
       
      
       let button = event.code;
@@ -1015,7 +1115,7 @@ class Keyboard {
       
     }
 
-    document.onkeyup = (event) => {
+    this.keyboardContainer.onkeyup = (event) => {
       
       let button = event.code;
 
@@ -1044,15 +1144,6 @@ class Keyboard {
 
     btn.classList.remove('btn-selected');
   }
-
-
-//   _changeLanguage(event) {
-
-//     this.language = this.language === 'EN' ? 'RU' : 'EN';
-//     localStorage.setItem('language', this.language);
-//     }
-    
-//   }
 }
 
 
