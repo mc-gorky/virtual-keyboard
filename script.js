@@ -12,6 +12,7 @@ const buttonTypes =  {
   control: 'control',
   meta: 'meta',
   alt: 'alt',
+  del: 'del',
   spacebar: 'spacebar',
 }
 
@@ -390,20 +391,6 @@ const buttonsConfig = {
     },
     id: 'Backslash',
   },
-  Slash: {
-    type: buttonTypes.printSymbol,
-    text: {
-      en: {
-        default: '/',
-        shift: '?',
-      },
-      ru: {
-        default: '/',
-        shift: '?',
-      },
-    },
-    id: 'Slash',
-  },
   CapsLock: {
     type: buttonTypes.capsLock,
     text: 'Caps Lock',
@@ -704,14 +691,28 @@ const buttonsConfig = {
     },
     id: 'Period',
   },
+  Slash: {
+    type: buttonTypes.printSymbol,
+    text: {
+      en: {
+        default: '/',
+        shift: '?',
+      },
+      ru: {
+        default: '.',
+        shift: ',',
+      },
+    },
+    id: 'Slash',
+  },
   ControlLeft: {
     type: buttonTypes.control,
-    text: 'Control',
+    text: 'Ctrl',
     id: 'ControlLeft', 
   },
   ControlRight: {
     type: buttonTypes.control,
-    text: 'Control',
+    text: 'Ctrl',
     id: 'ControlRight', 
   },
   MetaLeft: {
@@ -738,6 +739,67 @@ const buttonsConfig = {
     type: buttonTypes.spacebar,
     text: '',
     id: 'Space', 
+  },
+  ArrowLeft: {
+    type: buttonTypes.printSymbol,
+    text: {
+      en: {
+        default: '◄',
+        shift: '◄',
+      },
+      ru: {
+        default: '◄',
+        shift: '◄',
+      },
+    },
+    id: 'ArrowLeft',
+  },
+  ArrowRight: {
+    type: buttonTypes.printSymbol,
+    text: {
+      en: {
+        default: '►',
+        shift: '►',
+      },
+      ru: {
+        default: '►',
+        shift: '►',
+      },
+    },
+    id: 'ArrowRight',
+  },
+  ArrowDown: {
+    type: buttonTypes.printSymbol,
+    text: {
+      en: {
+        default: '▼',
+        shift: '▼',
+      },
+      ru: {
+        default: '▼',
+        shift: '▼',
+      },
+    },
+    id: 'ArrowDown',
+  },
+  ArrowUp: {
+    type: buttonTypes.printSymbol,
+    text: {
+      en: {
+        default: '▲',
+        shift: '▲',
+      },
+      ru: {
+        default: '▲',
+        shift: '▲',
+      },
+    },
+    id: 'ArrowUp',
+  },
+  Delete: {
+    type: buttonTypes.del,
+    text: 'Del',
+    id: 'Delete', 
   },
 };
 
@@ -773,7 +835,7 @@ const config = [
     buttonsConfig.BracketLeft,
     buttonsConfig.BracketRight,
     buttonsConfig.Backslash,
-    buttonsConfig.Slash,
+    buttonsConfig.Delete,
   ],
   [
     buttonsConfig.CapsLock,
@@ -801,6 +863,8 @@ const config = [
     buttonsConfig.KeyM,
     buttonsConfig.Comma,
     buttonsConfig.Period,
+    buttonsConfig.Slash,
+    buttonsConfig.ArrowUp,
     buttonsConfig.ShiftRight,
   ],
   [
@@ -809,6 +873,9 @@ const config = [
     buttonsConfig.AltLeft,
     buttonsConfig.Space,
     buttonsConfig.AltRight,
+    buttonsConfig.ArrowLeft,
+    buttonsConfig.ArrowDown,
+    buttonsConfig.ArrowRight,
     buttonsConfig.MetaRight,
     buttonsConfig.ControlRight,
   ],
@@ -825,6 +892,7 @@ class App {
 
       const textarea = new Textarea();
       const keyboard = new Keyboard(language, config);
+      const description = new Description();
     }
 }
 
@@ -904,6 +972,9 @@ class Keyboard {
       case buttonTypes.spacebar:
         btn = this._creatSpacebarButton(btnConfig);
         break;
+      case buttonTypes.del:
+        btn = this._creatDelButton(btnConfig);
+        break;
     }
 
     return btn;
@@ -918,15 +989,70 @@ class Keyboard {
     btn.id = btnConfig.id;
     btn.setAttribute('symbol-btn', '');
 
-    btn.onclick = this._printSymbol;
+    btn.onclick = this._onSymbolButtonClick.bind(this);
 
     return btn;
   }
 
-  _printSymbol(event) {
-    const output = event.target.innerText;
+  _onSymbolButtonClick(event) {
+    const button = event.target;
 
-    document.querySelector('.textarea').value += output;
+    this._printSymbol(button);
+  }
+
+  _printSymbol(button) {
+    const output = button.innerText;
+    const textArea = document.getElementById('textarea');
+    const selectionStart = textArea.selectionStart;
+    const selectionEnd = textArea.selectionEnd;
+
+    textArea.focus();
+    textArea.setRangeText(output, selectionStart, selectionEnd, 'end');
+  }
+
+  _onEnterButtonClick() {
+    this._printEnter();
+  }
+
+  _printEnter() {
+    const output = "\n";
+
+    const textArea = document.getElementById('textarea');
+    const selectionStart = textArea.selectionStart;
+    const selectionEnd = textArea.selectionEnd;
+    textArea.focus();
+    textArea.setRangeText(output, selectionStart, selectionEnd, 'end');
+  }
+
+  _onSpaceButtonClick() {
+    this._printSpace();
+  }
+
+  _printSpace() {
+    const output = " ";
+
+    const textArea = document.getElementById('textarea');
+    const selectionStart = textArea.selectionStart;
+    const selectionEnd = textArea.selectionEnd;
+    textArea.focus();
+    textArea.setRangeText(output, selectionStart, selectionEnd, 'end');
+  }
+
+  _onTabClick() {
+    this._printTab();
+  }
+
+  _printTab() {
+    const output = "    ";
+    const textArea = document.getElementById('textarea');
+
+    const selectionStart = textArea.selectionStart;
+    const selectionEnd = textArea.selectionEnd;
+
+    textArea.focus();
+    textArea.setRangeText(output, selectionStart, selectionEnd, 'end');
+
+    //document.querySelector('.textarea').value += output;
   }
 
   _createCapsLockButton(btnConfig) {
@@ -946,6 +1072,19 @@ class Keyboard {
     btn.innerText = btnConfig.text;
     btn.id = btnConfig.id;
 
+    btn.onclick = this._onBackspaceClick;
+
+    return btn;
+  }
+
+  _creatDelButton(btnConfig) {
+    const btn = document.createElement('button');
+
+    btn.innerText = btnConfig.text;
+    btn.id = btnConfig.id;
+
+    btn.onclick = this._onDelClick;
+
     return btn;
   }
 
@@ -954,6 +1093,8 @@ class Keyboard {
 
     btn.innerText = btnConfig.text;
     btn.id = btnConfig.id;
+
+    btn.onclick = this._onEnterButtonClick.bind(this);
 
     return btn;
   }
@@ -989,10 +1130,12 @@ class Keyboard {
     return btn;
   }
 
-  _creatSpacebarButton() {
+  _creatSpacebarButton(btnConfig) {
     const btn = document.createElement('button');
 
-    btn.id = 'spacebar';
+    btn.id = btnConfig.id;
+
+    btn.onclick = this._onSpaceButtonClick.bind(this);
 
     return btn;
   }
@@ -1012,11 +1155,19 @@ class Keyboard {
     btn.innerText = btnConfig.text;
     btn.id = btnConfig.id;
 
+    btn.onclick = this._onTabClick.bind(this);
+
     return btn;
   }
 
   _onCapsLockClick(event) {
-    const index = this.selectedButtons.indexOf('CapsLock') // move to separate const
+    const button = event.target;
+
+    this._toggleCapsLock(button);
+  }
+
+  _toggleCapsLock(button) {
+    const index = this.selectedButtons.indexOf('CapsLock'); // move to separate const
 
     if (index === -1) { 
       this.selectedButtons.push('CapsLock');
@@ -1024,19 +1175,23 @@ class Keyboard {
       this.selectedButtons.splice(index, 1);
     }
 
-    event.target.classList.toggle('btn-selected');
+    button.classList.toggle('btn-selected');
 
     this._changeButtonText();
   }
 
-  _onShiftClick(event) {
+  _onShiftClick() {
+    const id = event.target.id;
+
+    this._handleShiftClick(id);
+  }
+
+  _handleShiftClick(code) {
     const isShiftOn = this.selectedButtons.includes('ShiftLeft') || this.selectedButtons.includes('ShiftRight'); // move to separate const
 
     if (isShiftOn) { 
       this.selectedButtons = this.selectedButtons.filter(button => button !== 'ShiftLeft' && button !== 'ShiftRight');
     } else {
-      const code = event.target.id;
-
       this.selectedButtons.push(code);
     }
 
@@ -1045,13 +1200,18 @@ class Keyboard {
   }
 
   _onCtrlClick(event) {
+    const id = event.target.id;
+
+    this._handleCtrlClick(id);
+  }
+
+  _handleCtrlClick(code) {
+
     const isCtrlOn = this.selectedButtons.includes('ControlLeft') || this.selectedButtons.includes('ControlRight'); // move to separate const
 
     if (isCtrlOn) { 
       this.selectedButtons = this.selectedButtons.filter(button => button !== 'ControlLeft' && button !== 'ControlRight');
     } else {
-      const code = event.target.id;
-
       this.selectedButtons.push(code);
     }
 
@@ -1059,7 +1219,7 @@ class Keyboard {
     this._changeButtonText();
   }
 
-  _checkShiftCtrlCombination() {
+  _handleShiftCtrlCombination() {
     let isShiftOn = this.selectedButtons.includes('ShiftLeft') || this.selectedButtons.includes('ShiftRight'); // move to separate const
     let isCtrlOn = this.selectedButtons.includes('ControlLeft') || this.selectedButtons.includes('ControlRight'); // move to separate const
 
@@ -1070,6 +1230,10 @@ class Keyboard {
         button => button !== 'ShiftLeft' && button !== 'ShiftRight' && button !== 'ControlLeft' && button !== 'ControlRight'
       );
     }
+  }
+
+  _checkShiftCtrlCombination() {
+    this._handleShiftCtrlCombination();
 
     this._toggleButton('ShiftLeft'); // move to separate const
     this._toggleButton('ShiftRight'); // move to separate const
@@ -1120,38 +1284,162 @@ class Keyboard {
     });
   }
 
+  _onBackspaceClick() {
+    const textArea = document.querySelector('.textarea');
+    const textLength = textArea.textLength;
+    const selectionStart = textArea.selectionStart;
+    const selectionEnd = textArea.selectionEnd;
+    const selectedLength = selectionEnd - selectionStart;
+
+    if (!textLength || !selectedLength && !selectionStart) {
+      return;
+    }
+
+    textArea.focus();
+
+    textArea.setRangeText('', selectionStart - 1, selectionStart, 'end');
+  }
+
+  _onDelClick() {
+    const textArea = document.getElementById('textarea');
+    const textLength = textArea.textLength;
+    let selectionStart = textArea.selectionStart;
+    
+    textArea.focus();
+    textArea.setRangeText('', selectionStart, selectionStart + 1, 'end');
+
+  }
+
+  _onKeyboardShiftOrCtrlDown(code) {
+    const index = this.selectedButtons.indexOf(code);
+
+    if (index === -1) { 
+      this.selectedButtons.push(code);
+    }
+
+    this._changeButtonText();
+  }
+
+  _onKeyboardShiftUp() {
+    this.selectedButtons = this.selectedButtons.filter(button => button !== 'ShiftLeft' && button !== 'ShiftRight');
+
+    this._changeButtonText();
+  }
+
+  _onKeyboardCtrlUp() {
+    this.selectedButtons = this.selectedButtons.filter(button => button !== 'ControlLeft' && button !== 'ControlRight');
+
+    this._changeButtonText();
+  }
+
   _addKeyboardListener() {
-    document.onkeydown = ({ code }) => {
+
+    document.onkeydown = (event) => {
+      event.preventDefault();
+
+      const { code } = event;
       const config = buttonsConfig[code];
-      // const buttons
-      debugger;
+      const button = this.keyboardContainer.querySelector(`#${code}`);
 
-      // // this._printLetter(buttonConfig[button]);
-      // this._selectButton(button);
-      
+      switch(config.type) {
+        case buttonTypes.printSymbol:
+          this._printSymbol(button);
+          this._selectButton(button);
+          break;
+        case buttonTypes.backspace:
+          this._onBackspaceClick();
+          this._selectButton(button);
+          break;
+        case buttonTypes.del:
+          this._onDelClick();
+          this._selectButton(button);
+          break;
+
+        case buttonTypes.enter:
+          this._onEnterButtonClick();
+          this._selectButton(button);
+          break;
+        case buttonTypes.tab:
+          this._onTabClick();
+          this._selectButton(button);
+          break;
+        case buttonTypes.shift:
+          this._onKeyboardShiftOrCtrlDown(code);
+          this._selectButton(button);
+          this._handleShiftCtrlCombination();
+          break;
+        case buttonTypes.control:
+          this._onKeyboardShiftOrCtrlDown(code);
+          this._selectButton(button);
+          this._handleShiftCtrlCombination();
+          break;
+        case buttonTypes.meta:
+          this._selectButton(button);
+            break;
+        case buttonTypes.alt:
+          this._selectButton(button);
+          break;
+        case buttonTypes.spacebar:
+          this._onSpaceButtonClick();
+          this._selectButton(button);
+          break;
+      }
     }
 
-    document.onkeyup = ({ code }) => {
-      debugger;
-      
-      // let button = event.code;
+    document.onkeyup = (event) => {
+      const { code } = event;
+      const config = buttonsConfig[code];
+      const button = this.keyboardContainer.querySelector(`#${code}`);
 
-      // // this._printLetter(buttonConfig[button]);
-      // this._deselectButton(button);
+      switch(config.type) {
+        case buttonTypes.printSymbol:
+          this._deselectButton(button);
+          break;
+        case buttonTypes.backspace:
+          this._deselectButton(button);
+          break;
+          case buttonTypes.del:
+            this._deselectButton(button);
+            break;
+        case buttonTypes.capsLock:
+          this._toggleCapsLock(button);
+          break;
+        case buttonTypes.tab:
+          this._deselectButton(button);
+          break;
+        case buttonTypes.shift:
+          this._onKeyboardShiftUp();
+          this._deselectButton(button);
+          break;
+        case buttonTypes.control:
+          this._onKeyboardCtrlUp();
+          this._deselectButton(button);
+          break;
+        case buttonTypes.enter:
+          this._deselectButton(button);
+          break;
+        case buttonTypes.meta:
+          this._deselectButton(button);
+          break;
+        case buttonTypes.alt:
+          this._deselectButton(button);
+          break;
+        case buttonTypes.spacebar:
+          this._deselectButton(button);
+          break;
+      }
       
     }
   }
 
-  _selectButton(id) { // TODO check
-    const btn = document.getElementById(id);
+  _selectButton(button) {
 
-    btn.classList.add('btn-selected');
+    button.classList.add('btn-selected');
   }
 
-  _deselectButton(id) { // TODO check
-    const btn = document.getElementById(id);
+  _deselectButton(button) {
 
-    btn.classList.remove('btn-selected');
+    button.classList.remove('btn-selected');
   }
 }
 
@@ -1162,7 +1450,16 @@ class Textarea {
     
     const textarea = document.createElement('textarea');
     textarea.classList.add('textarea');  
+    textarea.id = 'textarea';
     document.body.appendChild(textarea);
   }
+}
 
+class Description {
+  constructor() {  
+    const description = document.createElement('p');
+    description.classList.add('description');
+    description.innerText = 'Клавиатура создана в операционной системе Windows. Для переключения клавиш нажмите ctrl + shift'
+    document.body.appendChild(description);
+  }
 }

@@ -1,7 +1,6 @@
 .textarea {
-    position: absolute;
-    left: 30%;
-    width: 600px;
+    margin-left: 15%;
+    width: 700px;
     height: 200px;
     border-radius: 5px;
     outline: none;
@@ -10,11 +9,9 @@
 }
 
 .keyboard-container {
-    position: absolute;
-    left: 25%;
-    top: 45%;
-    width: 600px;
-    height: 100px;
+    margin-left: 15%;
+    margin-top: 20px;
+    width: 700px;
 }
 
 .keyboard-row {
@@ -39,6 +36,11 @@
     color: red;
 } */
 
-#spacebar{ 
+#Space{ 
     width: 40%;;
+}
+
+.description {
+    margin-left: 15%;
+    margin-top: 20px;
 }
