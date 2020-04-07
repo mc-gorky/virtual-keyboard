@@ -1,3 +1,7 @@
+* {
+    box-sizing: border-box;
+}
+
 .textarea {
     margin-left: 15%;
     width: 700px;
@@ -9,9 +13,11 @@
 }
 
 .keyboard-container {
+    padding: 6px;
     margin-left: 15%;
     margin-top: 20px;
     width: 700px;
+    background-color: gray;
 }
 
 .keyboard-row {
@@ -21,23 +27,57 @@
 }
 
 .btn-selected {
-    background-color: black;
+    background-color: #85c59a;
     color: white;
 }
 
 .button {
     display: block;
-    width: 15%;
+    padding: 0;
+    width: 40px;
     height: 40px;
     outline: none;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
 }
 
-/* .button:active {
-    color: red;
-} */
+.button:hover {
+    background-color: #6b756e;
+}
 
-#Space{ 
-    width: 40%;;
+.button:active {
+    color: red;
+    background-color: #85c59a;
+}
+
+.Backspace {
+    width: 100px;
+}
+
+.Tab {
+    width: 60px;
+}
+
+.Enter {
+    width: 121px;
+}
+
+.CapsLock {
+    width: 110px;
+}
+
+.ShiftLeft{
+    width: 110px;
+}
+
+.ShiftRight{
+    width: 121px;
+}
+
+
+.Space { 
+    width: 320px;;
 }
 
 .description {
