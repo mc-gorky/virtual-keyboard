@@ -1,9 +1,11 @@
 * {
     box-sizing: border-box;
+    font-family: Arial;
 }
 
 .textarea {
-    margin-left: 15%;
+    display: block;
+    margin: 0 auto;
     width: 700px;
     height: 200px;
     border-radius: 5px;
@@ -13,17 +15,15 @@
 }
 
 .keyboard-container {
+    display: block;
+    margin: 30px auto 15px;
     padding: 6px;
-    margin-left: 15%;
-    margin-top: 20px;
     width: 700px;
     background-color: gray;
 }
 
-.keyboard-row {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 2px;
+.keyboard-row:not(:last-child) {
+    margin-bottom: 3px;
 }
 
 .btn-selected {
@@ -32,14 +32,21 @@
 }
 
 .button {
-    display: block;
+    display: inline-block;
     padding: 0;
     width: 40px;
     height: 40px;
+    vertical-align: top;
     outline: none;
     border: none;
     cursor: pointer;
     transition: background-color 0.3s;
+    border-radius: 3px;
+    box-shadow: 2px 2px 5px 0px #4e4e4e;
+}
+
+.button:not(:last-child)  {
+    margin-right: 4px;
 }
 
 .button:hover {
@@ -47,40 +54,39 @@
 }
 
 .button:active {
-    color: red;
     background-color: #85c59a;
+    color: white;
 }
 
-.Backspace {
-    width: 100px;
+.backspace {
+    width: 116px;
 }
 
-.Tab {
-    width: 60px;
+.tab {
+    width: 72px;
 }
 
-.Enter {
-    width: 121px;
-}
-
-.CapsLock {
+.enter {
     width: 110px;
 }
 
-.ShiftLeft{
-    width: 110px;
+.capsLock {
+    width: 90px;
 }
 
-.ShiftRight{
-    width: 121px;
+.shiftLeft {
+    width: 116px;
 }
 
+.shiftRight {
+    width: 84px;
+}
 
-.Space { 
-    width: 320px;;
+.space { 
+    width: 336px;
 }
 
 .description {
-    margin-left: 15%;
-    margin-top: 20px;
+    text-align: center;
+    font-size: 14px;
 }

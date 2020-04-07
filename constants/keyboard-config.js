@@ -554,11 +554,13 @@ export const buttonsConfig = {
   ShiftLeft: {
     type: buttonTypes.shift,
     text: 'Shift',
+    class: 'shiftLeft',
     id: 'ShiftLeft',
   },
   ShiftRight: {
     type: buttonTypes.shift,
     text: 'Shift',
+    class: 'shiftRight',
     id: 'ShiftRight',
   },
   KeyZ: {
@@ -872,7 +874,6 @@ export const config = [
     buttonsConfig.ArrowLeft,
     buttonsConfig.ArrowDown,
     buttonsConfig.ArrowRight,
-    buttonsConfig.MetaRight,
     buttonsConfig.ControlRight,
   ],
 ];

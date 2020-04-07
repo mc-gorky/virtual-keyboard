@@ -1,25 +1,21 @@
-import {buttonTypes} from './constants/keyboard-config.js';
-import {buttonsConfig} from './constants/keyboard-config.js';
-import {config} from './constants/keyboard-config.js';
-
+import { buttonTypes } from './constants/keyboard-config.js';
+import { buttonsConfig } from './constants/keyboard-config.js';
+import { config } from './constants/keyboard-config.js';
 
 window.onload = () => {
-  const app = new App();
+  new App();
 }
 
 class App {
     constructor() {
-      const language = localStorage.getItem('language') || 'EN';
-
-      const textarea = new Textarea();
-      const keyboard = new Keyboard(language, config);
-      const description = new Description();
+      new Textarea();
+      new Keyboard(config);
     }
 }
 
 class Keyboard {
-  constructor(language, config) {
-      this.language = language;
+  constructor(config) {
+      this.language = localStorage.getItem('language') || 'EN';
       this.selectedButtons = [];
 
       this.keyboardContainer = this._createKeyboardContainer();
@@ -27,6 +23,7 @@ class Keyboard {
       config.forEach(rowConfig => this._createRow(rowConfig));
       
       this._addKeyboardListener();
+      this._createDescription();
   }
 
   _createKeyboardContainer() {
@@ -47,8 +44,9 @@ class Keyboard {
       const btn = this._createButton(btnConfig);
 
       if (btn) {
-        row.append(btn);
         btn.classList.add('button');
+      
+        row.append(btn);
       }
     });
 
@@ -133,10 +131,10 @@ class Keyboard {
 
   _printEnter() {
     const output = "\n";
-
     const textArea = document.getElementById('textarea');
     const selectionStart = textArea.selectionStart;
     const selectionEnd = textArea.selectionEnd;
+
     textArea.focus();
     textArea.setRangeText(output, selectionStart, selectionEnd, 'end');
   }
@@ -147,10 +145,10 @@ class Keyboard {
 
   _printSpace() {
     const output = " ";
-
     const textArea = document.getElementById('textarea');
     const selectionStart = textArea.selectionStart;
     const selectionEnd = textArea.selectionEnd;
+
     textArea.focus();
     textArea.setRangeText(output, selectionStart, selectionEnd, 'end');
   }
@@ -175,7 +173,7 @@ class Keyboard {
 
     btn.innerText = btnConfig.text;
     btn.id = btnConfig.id;
-    btn.classList.add(btn.id);
+    btn.classList.add('capsLock');
 
     btn.onclick = this._onCapsLockClick.bind(this);
 
@@ -187,7 +185,7 @@ class Keyboard {
 
     btn.innerText = btnConfig.text;
     btn.id = btnConfig.id;
-    btn.classList.add(btn.id);
+    btn.classList.add('backspace');
 
     btn.onclick = this._onBackspaceClick;
 
@@ -199,7 +197,6 @@ class Keyboard {
 
     btn.innerText = btnConfig.text;
     btn.id = btnConfig.id;
-    btn.classList.add(btn.id);
 
     btn.onclick = this._onDelClick;
 
@@ -211,7 +208,7 @@ class Keyboard {
 
     btn.innerText = btnConfig.text;
     btn.id = btnConfig.id;
-    btn.classList.add(btn.id);
+    btn.classList.add('enter');
 
     btn.onclick = this._onEnterButtonClick.bind(this);
 
@@ -223,7 +220,8 @@ class Keyboard {
 
     btn.innerText = btnConfig.text;
     btn.id = btnConfig.id;
-    btn.classList.add(btn.id);
+    btn.class = btnConfig.class;
+    btn.classList.add(btn.class);
 
     btn.onclick = this._onShiftClick.bind(this);
 
@@ -235,7 +233,6 @@ class Keyboard {
 
     btn.innerText = btnConfig.text;
     btn.id = btnConfig.id;
-    btn.classList.add(btn.id);
 
     btn.onclick = this._onCtrlClick.bind(this);
 
@@ -247,7 +244,6 @@ class Keyboard {
 
     btn.innerText = btnConfig.text;
     btn.id = btnConfig.id;
-    btn.classList.add(btn.id);
 
     return btn;
   }
@@ -256,7 +252,7 @@ class Keyboard {
     const btn = document.createElement('button');
 
     btn.id = btnConfig.id;
-    btn.classList.add(btn.id);
+    btn.classList.add('space');
 
     btn.onclick = this._onSpaceButtonClick.bind(this);
 
@@ -268,7 +264,6 @@ class Keyboard {
 
     btn.innerText = 'Win';
     btn.id = 'meta';
-    btn.classList.add('meta');
 
     return btn;
   }
@@ -278,7 +273,7 @@ class Keyboard {
 
     btn.innerText = btnConfig.text;
     btn.id = btnConfig.id;
-    btn.classList.add(btn.id);
+    btn.classList.add('tab');
 
     btn.onclick = this._onTabClick.bind(this);
 
@@ -331,7 +326,6 @@ class Keyboard {
   }
 
   _handleCtrlClick(code) {
-
     const isCtrlOn = this.selectedButtons.includes('ControlLeft') || this.selectedButtons.includes('ControlRight'); // move to separate const
 
     if (isCtrlOn) { 
@@ -387,9 +381,9 @@ class Keyboard {
     const isShiftOn = this.selectedButtons.includes('ShiftLeft') || this.selectedButtons.includes('ShiftRight'); // move to separate const
     const languageKey = this.language === 'EN' ? 'en' : 'ru';
 
-    const symbolBtns = this.keyboardContainer.querySelectorAll('button[symbol-btn]');
+    const symbolButtons = this.keyboardContainer.querySelectorAll('button[symbol-btn]');
 
-    symbolBtns.forEach(button => {
+    symbolButtons.forEach(button => {
       const id = button.id;
       const config = buttonsConfig[id].text[languageKey];
 
@@ -456,117 +450,121 @@ class Keyboard {
     this._changeButtonText();
   }
 
-  _addKeyboardListener() {
+  _onKeyDown(event) {
+    event.preventDefault();
 
-    document.onkeydown = (event) => {
-      event.preventDefault();
+    const { code } = event;
+    const config = buttonsConfig[code];
+    const button = this.keyboardContainer.querySelector(`#${code}`);
 
-      const { code } = event;
-      const config = buttonsConfig[code];
-      const button = this.keyboardContainer.querySelector(`#${code}`);
-
-      switch(config.type) {
-        case buttonTypes.printSymbol:
-          this._printSymbol(button);
-          this._selectButton(button);
+    switch(config.type) {
+      case buttonTypes.printSymbol:
+        this._printSymbol(button);
+        this._selectButton(button);
+        break;
+      case buttonTypes.backspace:
+        this._onBackspaceClick();
+        this._selectButton(button);
+        break;
+      case buttonTypes.del:
+        this._onDelClick();
+        this._selectButton(button);
+        break;
+      case buttonTypes.enter:
+        this._onEnterButtonClick();
+        this._selectButton(button);
+        break;
+      case buttonTypes.tab:
+        this._onTabClick();
+        this._selectButton(button);
+        break;
+      case buttonTypes.shift:
+        this._onKeyboardShiftOrCtrlDown(code);
+        this._selectButton(button);
+        this._handleShiftCtrlCombination();
+        break;
+      case buttonTypes.control:
+        this._onKeyboardShiftOrCtrlDown(code);
+        this._selectButton(button);
+        this._handleShiftCtrlCombination();
+        break;
+      case buttonTypes.meta:
+        this._selectButton(button);
           break;
-        case buttonTypes.backspace:
-          this._onBackspaceClick();
-          this._selectButton(button);
-          break;
-        case buttonTypes.del:
-          this._onDelClick();
-          this._selectButton(button);
-          break;
-
-        case buttonTypes.enter:
-          this._onEnterButtonClick();
-          this._selectButton(button);
-          break;
-        case buttonTypes.tab:
-          this._onTabClick();
-          this._selectButton(button);
-          break;
-        case buttonTypes.shift:
-          this._onKeyboardShiftOrCtrlDown(code);
-          this._selectButton(button);
-          this._handleShiftCtrlCombination();
-          break;
-        case buttonTypes.control:
-          this._onKeyboardShiftOrCtrlDown(code);
-          this._selectButton(button);
-          this._handleShiftCtrlCombination();
-          break;
-        case buttonTypes.meta:
-          this._selectButton(button);
-            break;
-        case buttonTypes.alt:
-          this._selectButton(button);
-          break;
-        case buttonTypes.spacebar:
-          this._onSpaceButtonClick();
-          this._selectButton(button);
-          break;
-      }
-    }
-
-    document.onkeyup = (event) => {
-      const { code } = event;
-      const config = buttonsConfig[code];
-      const button = this.keyboardContainer.querySelector(`#${code}`);
-
-      switch(config.type) {
-        case buttonTypes.printSymbol:
-          this._deselectButton(button);
-          break;
-        case buttonTypes.backspace:
-          this._deselectButton(button);
-          break;
-          case buttonTypes.del:
-            this._deselectButton(button);
-            break;
-        case buttonTypes.capsLock:
-          this._toggleCapsLock(button);
-          break;
-        case buttonTypes.tab:
-          this._deselectButton(button);
-          break;
-        case buttonTypes.shift:
-          this._onKeyboardShiftUp();
-          this._deselectButton(button);
-          break;
-        case buttonTypes.control:
-          this._onKeyboardCtrlUp();
-          this._deselectButton(button);
-          break;
-        case buttonTypes.enter:
-          this._deselectButton(button);
-          break;
-        case buttonTypes.meta:
-          this._deselectButton(button);
-          break;
-        case buttonTypes.alt:
-          this._deselectButton(button);
-          break;
-        case buttonTypes.spacebar:
-          this._deselectButton(button);
-          break;
-      }
-      
+      case buttonTypes.alt:
+        this._selectButton(button);
+        break;
+      case buttonTypes.spacebar:
+        this._onSpaceButtonClick();
+        this._selectButton(button);
+        break;
     }
   }
 
-  _selectButton(button) {
+  _onKeyUp(event) {
+    const { code } = event;
+    const config = buttonsConfig[code];
+    const button = this.keyboardContainer.querySelector(`#${code}`);
 
+    switch(config.type) {
+      case buttonTypes.printSymbol:
+        this._deselectButton(button);
+        break;
+      case buttonTypes.backspace:
+        this._deselectButton(button);
+        break;
+        case buttonTypes.del:
+          this._deselectButton(button);
+          break;
+      case buttonTypes.capsLock:
+        this._toggleCapsLock(button);
+        break;
+      case buttonTypes.tab:
+        this._deselectButton(button);
+        break;
+      case buttonTypes.shift:
+        this._onKeyboardShiftUp();
+        this._deselectButton(button);
+        break;
+      case buttonTypes.control:
+        this._onKeyboardCtrlUp();
+        this._deselectButton(button);
+        break;
+      case buttonTypes.enter:
+        this._deselectButton(button);
+        break;
+      case buttonTypes.meta:
+        this._deselectButton(button);
+        break;
+      case buttonTypes.alt:
+        this._deselectButton(button);
+        break;
+      case buttonTypes.spacebar:
+        this._deselectButton(button);
+        break;
+    }
+  }
+
+  _addKeyboardListener() {
+    document.onkeydown = this._onKeyDown.bind(this);
+    document.onkeyup = this._onKeyUp.bind(this);
+  }
+
+  _selectButton(button) {
     button.classList.add('btn-selected');
   }
 
   _deselectButton(button) {
-
     button.classList.remove('btn-selected');
   }
-}
 
+  _createDescription() {
+    const description = document.createElement('p');
+    description.classList.add('description');
+    description.innerText = 'Клавиатура создана в операционной системе Windows. Для переключения клавиш нажмите ctrl + shift'
+    document.body.appendChild(description);
+  }
+}
 
 class Textarea {
   constructor() {
@@ -576,14 +574,5 @@ class Textarea {
     textarea.classList.add('textarea');  
     textarea.id = 'textarea';
     document.body.appendChild(textarea);
-  }
-}
-
-class Description {
-  constructor() {  
-    const description = document.createElement('p');
-    description.classList.add('description');
-    description.innerText = 'Клавиатура создана в операционной системе Windows. Для переключения клавиш нажмите ctrl + shift'
-    document.body.appendChild(description);
   }
 }
